@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div
+      class="menu-button"
+      style="height: 70px; width: 70px; background: none"
+    >
+      <button class="menu-button">
+        <div id="icon">
+          <span id="layer1"></span>
+          <span id="layer2"></span>
+          <span id="layer3"></span>
+        </div>
+      </button>
+    </div>
+    <form class="menu">
+      <input
+        type="text"
+        autocomplete="off"
+        autofocus="off"
+        autocapitalize="sentence"
+        placeholder="Enter city name"
+        id="location"
+      />
+      <div class="menu-bottom">
+        <div class="location-actions">
+          <input type="submit" value="Find >" id="submit" />
+          <input
+            type="submit"
+            value="Current location >"
+            id="current-location"
+          />
+        </div>
+        <div class="last-search">
+          <span style="border-bottom: 1px solid #e9e9e9; padding: 0 5px; position: absolute;top: 0;"
+            >Last search <img src="images/search.svg" /> :
+          </span>
+          <span id="last-search-value" style="padding-top: 40px;">
+            <span id="LAST"></span>
+          </span>
+        </div>
+      </div>
+    </form>
+
+    <section class="current-info">
+      <div class="date-container">
+        <!-- Time and date -->
+        <div class="cords-and-time">
+          <div class="time-and-date">
+            <div class="time" id="time"><span id="am-pm"></span></div>
+            <div class="date" id="date"></div>
+          </div>
+          <!-- Time-zone, country and cords -->
+          <div class="place-container">
+            <div class="time-zone" id="time-zone"></div>
+            <div id="country" class="country"></div>
+          </div>
+        </div>
+        <!-- Today forecast -->
+        <div class="today" id="current-temp">
+          <img src="" class="w-icon" />
+          <div class="day"></div>
+          <div class="temp">&#176; C</div>
+          <div class="temp">&#176; C</div>
+        </div>
+        <!-- Today weather spec -->
+
+        <div class="others" id="current-weather-items"></div>
+      </div>
+
+      <div class="future-forecast">
+        <h2 id="forecast-heading">Future forecast</h2>
+        <!-- Future forecast for next 7 days -->
+        <div id="weather-forecast" class="weather-forecast">
+          
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
