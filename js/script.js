@@ -14,13 +14,15 @@ const layer1 = document.getElementById("layer1");
 const layer2 = document.getElementById("layer2");
 const layer3 = document.getElementById("layer3");
 const currentLocationButton = document.getElementById("current-location");
+const alertBanner = document.querySelector(".alert");
+const successBanner = document.querySelector(".success");
 
 currentLocationButton.addEventListener("click", () => {
   menu.classList.toggle("menu-active");
   layer1.classList.toggle("layer1-active");
   layer2.classList.toggle("layer3-active");
   layer3.classList.toggle("layer2-active");
-  wantedLocation.value = "";
+  wantedLocation.value = null;
   getWeatherData();
 });
 
@@ -32,12 +34,12 @@ menuButton.addEventListener("click", () => {
 });
 
 const days = [
+  "Sunday",
   "Monday",
   "Tuesday",
-  "Wendsday",
+  "Wednesday",
   "Thursday",
   "Friday",
-  "Sunday",
   "Saturday",
 ];
 const months = [
@@ -72,25 +74,38 @@ setInterval(() => {
     " " +
     `<span id="am-pm"></span>${ampm}</div>`;
 
-  dateEl.innerHTML = days[day - 1] + ", " + date + " " + months[month];
+  dateEl.innerHTML = days[day] + ", " + date + " " + months[month];
 }, 1000);
 
 function getAnyLocationData() {
-  submitButton.addEventListener("click", function () {
-    menu.classList.toggle("menu-active");
-    layer1.classList.toggle("layer1-active");
-    layer2.classList.toggle("layer3-active");
-    layer3.classList.toggle("layer2-active");
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-        wantedLocation.value +
-        "&appid=63666c334cedf876a8067a31186d7ff2"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        showAnyLocationData(data);
-      });
+  submitButton.addEventListener("click", () => {
+    if (wantedLocation.value === "") {
+      alertBanner.style = "top:0";
+      alertBanner.classList.add("shake-horizontal");
+      setTimeout(() => {
+        alertBanner.style = "top:-12vh";
+        alertBanner.classList.remove("shake-horizontal");
+      }, 1800);
+    } else {
+      successBanner.style = "top:0";
+      setTimeout(() => {
+        successBanner.style = "top:-12vh";
+      }, 1000);
+
+      menu.classList.toggle("menu-active");
+      layer1.classList.toggle("layer1-active");
+      layer2.classList.toggle("layer3-active");
+      layer3.classList.toggle("layer2-active");
+      fetch(
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+          wantedLocation.value +
+          "&appid=63666c334cedf876a8067a31186d7ff2"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          showAnyLocationData(data);
+        });
+    }
   });
 }
 
@@ -107,12 +122,8 @@ function showAnyLocationData(data) {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       showWeatherData(data);
-      
-    })
-
-
+    });
 
   timezone.innerHTML = data.sys.country + " / " + data.name;
   countryEl.innerHTML =
@@ -161,49 +172,49 @@ function showAnyLocationData(data) {
     </div>
   `;
 
-  let otherDayForecast = "";
-  data.daily.forEach((day, idx) => {
-    if (idx === 0) {
-      currentTempEl.innerHTML = `
-      <div class="day" id="today-day">Today</div>
-      <img src="https://openweathermap.org/img/wn/${
-        data.weather[0].icon
-      }@4x.png"  id="today-w-icon"  class="w-icon" />
-      <div class="temp today-temp today-temp-first" >${Math.round(
-        data.main.temp_max - 273.15
-      )} &#176;C</div>
-      <div class="temp today-temp today-temp-second" >${Math.round(
-        data.main.temp_min - 273.15
-      )} &#176;C</div>
-      `;
-    } else {
-      otherDayForecast += `
-      <div class="weather-forecast-item" id="weather-item-deactive${idx}">
-            <div class=".future-forecast-no-description">
-            z
-            </div>
-            
-            <div class="future-forecast-description" id="description${idx}">
-              <div class="future-forecast-description-item">
-                <img src="images/pressure.svg" alt="" />
-                <p>Pressure</p>
-                <p>${data.daily[idx].pressure} HpA</p>
-              </div>
-              <div class="future-forecast-description-item">
-                <img src="images/humidity.svg" alt="" />
-                <p>Humidity</p>
-                <p>${data.daily[idx].humidity}%</p>
-              </div>
-              <div class="future-forecast-description-item">
-                <img src="images/wind-speed.svg" alt="" />
-                <p>Wind Speed</p>
-                <p>${Math.round(data.daily[idx].wind_speed)} MpH</p>
-              </div>
-            </div>
-          </div>
-      `;
-    }
-  });
+  // let otherDayForecast = "";
+  // data.daily.forEach((day, idx) => {
+  //   if (idx === 0) {
+  //     currentTempEl.innerHTML = `
+  //     <div class="day" id="today-day">Today</div>
+  //     <img src="https://openweathermap.org/img/wn/${
+  //       data.weather[0].icon
+  //     }@4x.png"  id="today-w-icon"  class="w-icon" />
+  //     <div class="temp today-temp today-temp-first" >${Math.round(
+  //       data.main.temp_max - 273.15
+  //     )} &#176;C</div>
+  //     <div class="temp today-temp today-temp-second" >${Math.round(
+  //       data.main.temp_min - 273.15
+  //     )} &#176;C</div>
+  //     `;
+  //   } else {
+  //     otherDayForecast += `
+  //     <div class="weather-forecast-item" id="weather-item-deactive${idx}">
+  //           <div class="future-forecast-no-description">
+  //           z
+  //           </div>
+
+  //           <div class="future-forecast-description" id="description${day}">
+  //             <div class="future-forecast-description-item">
+  //               <img src="images/pressure.svg" alt="" />
+  //               <p>Pressure</p>
+  //               <p>${data.daily[idx].pressure} HpA</p>
+  //             </div>
+  //             <div class="future-forecast-description-item">
+  //               <img src="images/humidity.svg" alt="" />
+  //               <p>Humidity</p>
+  //               <p>${data.daily[idx].humidity}%</p>
+  //             </div>
+  //             <div class="future-forecast-description-item">
+  //               <img src="images/wind-speed.svg" alt="" />
+  //               <p>Wind Speed</p>
+  //               <p>${Math.round(data.daily[idx].wind_speed)} MpH</p>
+  //             </div>
+  //           </div>
+  //         </div>
+  //     `;
+  //   }
+  // });
 }
 
 function getWeatherData() {
@@ -215,7 +226,6 @@ function getWeatherData() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         showWeatherData(data);
       });
   });
@@ -297,7 +307,6 @@ function showWeatherData(data) {
       `;
     } else {
       otherDayForecast += `
-      
       <div class="weather-forecast-item" id="weather-item-deactive${idx}">
             <div class="day">
               ${window.moment(day.dt * 1000).format("ddd")}
@@ -311,8 +320,6 @@ function showWeatherData(data) {
             <img src="https://openweathermap.org/img/wn/${
               day.weather[0].icon
             }@4x.png" class="w-icon"/>
-
-
             <div class="forecast-temperature">
               <div class="temp" id="temp-with-separator">${Math.round(
                 day.temp.day
@@ -320,7 +327,7 @@ function showWeatherData(data) {
               </div>
               <div class="temp">${Math.round(day.temp.night)}&#176; C</div>
             </div>
-            <div class="future-forecast-description" id="description${day}">
+            <div class="future-forecast-description" id="description${idx}">
               <div class="future-forecast-description-item">
                 <img src="images/pressure.svg" alt="" />
                 <p>Pressure</p>
@@ -345,24 +352,13 @@ function showWeatherData(data) {
   weatherForecastEl.innerHTML = otherDayForecast;
 }
 
-// document.addEventListener('DOMContentLoaded', function(){
-//   console.log('log')
-//   const desc = document.querySelector("#description_1");
-//   const card = document.querySelector("#weather-forecast-item-1");
-//   card.addEventListener("click", () => {
-//   desc.classList.toggle("description-active");
-//   card.classList.toggle("card-active");
-// });
-
-// })
-
 let lastLocations = [];
 let i = 0;
 
 const addLocation = (ev) => {
   ev.preventDefault();
   let location = {
-    location: document.getElementById("location").value,
+    location: wantedLocation.value,
   };
   lastLocations.push(location);
   document.forms[0].reset(),
@@ -375,18 +371,24 @@ const addLocation = (ev) => {
   ).innerHTML += `<span id="last-search-value" style="padding: 0 5px; margin:5px;">&bull; ${location.location}</span>`;
 
   document.getElementById("last-search-value").addEventListener("click", () => {
-    document.getElementById("location").value = location.location;
+    wantedLocation.value = location.location;
   });
 
-  if (i === 4) {
+  if (i === 3) {
     document
       .querySelector("#LAST")
       .removeChild(document.querySelector("#LAST").childNodes[0]);
-    i = 3;
+    i = 2;
   }
   i++;
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("submit").addEventListener("click", addLocation);
-});
+submitButton.addEventListener("click", addLocation);
+// const desc = document.querySelector("#description1");
+// const card = document.querySelector("#weather-item-deactive1");
+
+// card.addEventListener("click", () => {
+//   console.log("log");
+//   desc.classList.toggle("description-active");
+//   card.classList.toggle("card-active");
+// });
