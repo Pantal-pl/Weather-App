@@ -10,27 +10,28 @@ const wantedLocation = document.getElementById("location");
 const API_KEY = "63666c334cedf876a8067a31186d7ff2";
 const menuButton = document.querySelector(".menu-button");
 const menu = document.querySelector(".menu");
-const layer1 = document.getElementById("layer1");
-const layer2 = document.getElementById("layer2");
-const layer3 = document.getElementById("layer3");
 const currentLocationButton = document.getElementById("current-location");
 const alertBanner = document.querySelector(".alert");
 const successBanner = document.querySelector(".success");
-
-currentLocationButton.addEventListener("click", () => {
+const layer = [];
+for (let i = 0; i < 3; ++i) {
+  layer[i] = document.getElementById(`layer${i}`);
+}
+function menuActive(){
   menu.classList.toggle("menu-active");
   layer1.classList.toggle("layer1-active");
   layer2.classList.toggle("layer3-active");
   layer3.classList.toggle("layer2-active");
+}
+
+currentLocationButton.addEventListener("click", () => {
+  menuActive()
   wantedLocation.value = null;
   getWeatherData();
 });
 
 menuButton.addEventListener("click", () => {
-  layer1.classList.toggle("layer1-active");
-  layer2.classList.toggle("layer3-active");
-  layer3.classList.toggle("layer2-active");
-  menu.classList.toggle("menu-active");
+  menuActive()
 });
 
 const days = [
@@ -92,10 +93,7 @@ function getAnyLocationData() {
         successBanner.style = "top:-12vh";
       }, 1000);
 
-      menu.classList.toggle("menu-active");
-      layer1.classList.toggle("layer1-active");
-      layer2.classList.toggle("layer3-active");
-      layer3.classList.toggle("layer2-active");
+      menuActive()
       fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=" +
           wantedLocation.value +
@@ -171,50 +169,6 @@ function showAnyLocationData(data) {
       .format("HH:mm")}</p></div>
     </div>
   `;
-
-  // let otherDayForecast = "";
-  // data.daily.forEach((day, idx) => {
-  //   if (idx === 0) {
-  //     currentTempEl.innerHTML = `
-  //     <div class="day" id="today-day">Today</div>
-  //     <img src="https://openweathermap.org/img/wn/${
-  //       data.weather[0].icon
-  //     }@4x.png"  id="today-w-icon"  class="w-icon" />
-  //     <div class="temp today-temp today-temp-first" >${Math.round(
-  //       data.main.temp_max - 273.15
-  //     )} &#176;C</div>
-  //     <div class="temp today-temp today-temp-second" >${Math.round(
-  //       data.main.temp_min - 273.15
-  //     )} &#176;C</div>
-  //     `;
-  //   } else {
-  //     otherDayForecast += `
-  //     <div class="weather-forecast-item" id="weather-item-deactive${idx}">
-  //           <div class="future-forecast-no-description">
-  //           z
-  //           </div>
-
-  //           <div class="future-forecast-description" id="description${day}">
-  //             <div class="future-forecast-description-item">
-  //               <img src="images/pressure.svg" alt="" />
-  //               <p>Pressure</p>
-  //               <p>${data.daily[idx].pressure} HpA</p>
-  //             </div>
-  //             <div class="future-forecast-description-item">
-  //               <img src="images/humidity.svg" alt="" />
-  //               <p>Humidity</p>
-  //               <p>${data.daily[idx].humidity}%</p>
-  //             </div>
-  //             <div class="future-forecast-description-item">
-  //               <img src="images/wind-speed.svg" alt="" />
-  //               <p>Wind Speed</p>
-  //               <p>${Math.round(data.daily[idx].wind_speed)} MpH</p>
-  //             </div>
-  //           </div>
-  //         </div>
-  //     `;
-  //   }
-  // });
 }
 
 function getWeatherData() {
