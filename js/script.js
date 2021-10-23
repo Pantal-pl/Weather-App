@@ -204,12 +204,14 @@ function showWeatherData(data) {
   countryEl.innerHTML = data.lat + " &#176;N " + data.lon + " &#176;E";
   if (weatherDescription === "Clear") 
   {
+    document.querySelector(".clouds").style = "display:none"
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:none;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(20deg,rgba(35, 110, 250, 0.863) 42%,rgba(85, 133, 223, 1) 100%";
   } 
   else if (weatherDescription === "Clouds") 
-  {
+  { 
+    document.querySelector(".clouds").style = "display:block"
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:none;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(20deg,rgba(132, 135, 139, 0.863) 22%,rgb(106, 108, 112) 100%);";
@@ -217,24 +219,28 @@ function showWeatherData(data) {
   
   else if (weatherDescription === "Rain") 
   {
+    document.querySelector(".clouds").style = "display:none"
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:block;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(32deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
   } 
   else if (weatherDescription === "Thunderstorm") 
   {
+    document.querySelector(".clouds").style = "display:none"
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:block;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(30deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
   } 
   else if (weatherDescription === "Drizzle") 
   {
+    document.querySelector(".clouds").style = "display:none"
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:block;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(114, 118, 128) 80%);";
   } 
   else if (weatherDescription === "Snow") 
   {
+    document.querySelector(".clouds").style = "display:none"
     document.querySelector("#canvas").style = "display:none;"
     snow.style = "display:block;"
     menu.style = menuButton.style = body.style ="background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(175, 190, 219) 80%);";

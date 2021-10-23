@@ -18,7 +18,6 @@
   --success: #339900;
 }
 body {
- 
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -27,6 +26,89 @@ canvas, #canvas {
   position: absolute;
   display: none;
   z-index: -1;
+}
+/* END */
+
+/* clouds */
+.clouds {
+  position: absolute;
+  right: 0;
+  display: none;
+}
+.clouds img {
+  position: absolute;
+  width: 300px;
+  height: auto;
+  z-index: 2;
+}
+#cloud1{
+  animation: cloud1 11s infinite linear;
+}
+@keyframes cloud1 {
+  0%{
+    transform: translateX(10px);
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
+}
+#cloud2{
+  animation: cloud2 10s infinite linear;
+  animation-delay: 2s;
+}
+@keyframes cloud2 {
+  0%{
+    transform: translateX(10px) translateY(20px);
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
+}
+#cloud3{
+  animation: cloud3 12s infinite linear;
+}
+@keyframes cloud3 {
+  0%{
+    transform: translateX(10px) translateY(30px);
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
+}
+#cloud4{
+  animation: cloud4 10s infinite linear;
+  animation-delay: 2s;
+}
+@keyframes cloud4 {
+  0%{
+    transform: translateX(10px) translateY(10px);
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
+}
+#cloud5{
+  animation: cloud5 15s infinite linear;
+  animation-delay: 5s;
+}
+@keyframes cloud5 {
+  0%{
+    transform: translateX(10px) translateY(30px);
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
+}
+#cloud6{
+  animation: cloud6 8s infinite;
+}
+@keyframes cloud6 {
+  0%{
+    transform: translateX(10px) translateY(40px) ;
+  }
+  100%{
+   transform: translateX(-160vw);
+  }
 }
 /* END */
 
@@ -178,7 +260,7 @@ canvas, #canvas {
   padding: 20px;
   justify-content: space-around;
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   left: -100%;
   transition: 0.25s;
 }
