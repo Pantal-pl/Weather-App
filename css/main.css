@@ -705,3 +705,8 @@ canvas, #canvas {
   text-align: center;
 }
 /* END */
+@media (max-height:680px) {
+  .banner {
+    top: -14.5vh;
+  }
+}
