@@ -8,12 +8,14 @@ const currentTempEl = document.getElementById("current-temp");
 const submitButton = document.getElementById("submit");
 const wantedLocation = document.getElementById("location");
 const API_KEY = "63666c334cedf876a8067a31186d7ff2";
-const menuButton = document.querySelector(".menu-button");
+const menuButtonArea = document.querySelector(".menu-button");
+const menuButton = menuButtonArea.querySelector(".menu-button");
 const menu = document.querySelector(".menu");
 const currentLocationButton = document.getElementById("current-location");
 const alertBanner = document.querySelector(".alert");
 const successBanner = document.querySelector(".success");
 const body = document.querySelector("body");
+const snow = document.getElementById("snowCanvas");
 const layer = [];
 for (let i = 0; i < 3; ++i) {
   layer[i] = document.getElementById(`layer${i}`);
@@ -31,7 +33,7 @@ currentLocationButton.addEventListener("click", () => {
   getWeatherData();
 });
 
-menuButton.addEventListener("click", () => {
+menuButtonArea.addEventListener("click", () => {
   menuActive();
 });
 
@@ -200,24 +202,42 @@ function showWeatherData(data) {
   let weatherDescription = data.current.weather[0].main;
   timezone.innerHTML = data.timezone;
   countryEl.innerHTML = data.lat + " &#176;N " + data.lon + " &#176;E";
-  if (weatherDescription === "Clear") {
-    body.style =
-      "background: linear-gradient(0deg,rgba(35, 110, 250, 0.863) 42%,rgba(85, 133, 223, 1) 100%);";
-  } else if (weatherDescription === "Clouds") {
-    body.style =
-      " background: linear-gradient(10deg,rgba(96, 133, 202, 0.863) 2%,rgb(145, 146, 148) 80%);";
-  } else if (weatherDescription === "Rain") {
-    body.style =
-      "  background: linear-gradient(0deg,rgba(35, 110, 250, 0.863) 2%,rgb(28, 45, 77) 100%);";
-  } else if (weatherDescription === "Thunderstorm") {
-    body.style =
-      "background: linear-gradient(10deg,rgba(79, 90, 112, 0.863) 2%,rgb(20, 33, 59) 80%);";
-  } else if (weatherDescription === "Drizzle") {
-    body.style =
-      "background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(114, 118, 128) 80%);";
-  } else if (weatherDescription === "Snow") {
-    body.style =
-      "  background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(175, 190, 219) 80%);";
+  if (weatherDescription === "Clear") 
+  {
+    snow.style = "display:none;"
+    document.querySelector("#canvas").style = "display:none;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(35, 110, 250, 0.863) 42%,rgba(85, 133, 223, 1) 100%";
+  } 
+  else if (weatherDescription === "Clouds") 
+  {
+    snow.style = "display:none;"
+    document.querySelector("#canvas").style = "display:none;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(20deg,rgba(132, 135, 139, 0.863) 22%,rgb(106, 108, 112) 100%);";
+  }
+  
+  else if (weatherDescription === "Rain") 
+  {
+    snow.style = "display:none;"
+    document.querySelector("#canvas").style = "display:block;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
+  } 
+  else if (weatherDescription === "Thunderstorm") 
+  {
+    snow.style = "display:none;"
+    document.querySelector("#canvas").style = "display:block;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
+  } 
+  else if (weatherDescription === "Drizzle") 
+  {
+    snow.style = "display:none;"
+    document.querySelector("#canvas").style = "display:block;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(114, 118, 128) 80%);";
+  } 
+  else if (weatherDescription === "Snow") 
+  {
+    document.querySelector("#canvas").style = "display:none;"
+    snow.style = "display:block;"
+    menu.style = menuButton.style = body.style ="background: linear-gradient(10deg,rgba(104, 108, 117, 0.863) 20%,rgb(175, 190, 219) 80%);";
   }
   currentWeatherItemsEl.innerHTML = `
   <p id="details">Details</p>
