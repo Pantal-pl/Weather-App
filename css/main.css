@@ -18,11 +18,7 @@
   --success: #339900;
 }
 body {
-  background: linear-gradient(
-    0deg,
-    rgba(35, 110, 250, 0.863) 42%,
-    rgba(85, 133, 223, 1) 100%
-  );
+ 
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
