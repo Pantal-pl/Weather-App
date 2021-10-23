@@ -206,7 +206,7 @@ function showWeatherData(data) {
   {
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:none;"
-    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(35, 110, 250, 0.863) 42%,rgba(85, 133, 223, 1) 100%";
+    menu.style = menuButton.style = body.style ="background: linear-gradient(20deg,rgba(35, 110, 250, 0.863) 42%,rgba(85, 133, 223, 1) 100%";
   } 
   else if (weatherDescription === "Clouds") 
   {
@@ -219,13 +219,13 @@ function showWeatherData(data) {
   {
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:block;"
-    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
+    menu.style = menuButton.style = body.style ="background: linear-gradient(32deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
   } 
   else if (weatherDescription === "Thunderstorm") 
   {
     snow.style = "display:none;"
     document.querySelector("#canvas").style = "display:block;"
-    menu.style = menuButton.style = body.style ="background: linear-gradient(0deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
+    menu.style = menuButton.style = body.style ="background: linear-gradient(30deg,rgba(148, 150, 153, 0.863) 2%,rgb(29, 36, 49) 100%);";
   } 
   else if (weatherDescription === "Drizzle") 
   {
