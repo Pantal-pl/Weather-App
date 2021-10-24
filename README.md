@@ -1,6 +1,6 @@
 # Weather-App
 
-## **Features**:
+## **Features**
 - Info about user location , data and time
 - Forecast for current location
 - Forecast for any location which insert by user
