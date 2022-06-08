@@ -22,10 +22,6 @@
 - API from https://openweathermap.org/
 - ICONS from https://www.svgrepo.com
 
-## **Live**
-
-- https://thirsty-lalande-827a06.netlify.app/
-
 ## **Review**
 
 - https://user-images.githubusercontent.com/61602042/138596488-301d5329-2295-4b4d-adb3-3f4ad58ac7fd.mp4
